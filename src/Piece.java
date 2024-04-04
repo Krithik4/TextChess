@@ -18,6 +18,15 @@ public class Piece {
         this.pieceChar = pChar;
     }
 
+    public boolean getColor(){
+        return this.isWhite;
+        //true if white, false if black
+    }
+
+    public void setCoord(int r, int c){
+        this.row = r;
+        this.col = c;
+    }
     public String toString(){
         return " " + (this.isWhite ? "" : Colors.BLACK) + this.pieceChar + " " + Colors.RESET;
     }

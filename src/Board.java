@@ -1,7 +1,19 @@
+import java.util.HashMap;
 public class Board {
+    private HashMap<String, Integer> translate;
     private Piece[][] chessBoard;
-
+    private boolean whiteTurn;
     public Board(){
+        this.translate = new HashMap<String, Integer>();
+        this.translate.put("a", 0);
+        this.translate.put("b", 1);
+        this.translate.put("c", 2);
+        this.translate.put("d", 3);
+        this.translate.put("e", 4);
+        this.translate.put("f", 5);
+        this.translate.put("g", 6);
+        this.translate.put("h", 7);
+        this.whiteTurn = true;
         this.chessBoard = new Piece[8][8];
     }
 
@@ -31,6 +43,27 @@ public class Board {
         }
     }
 
+    public void takeTurn(String from, String to){
+        int fromC = this.translate.get(from.substring(0, 1));
+        int fromR = 8 - Integer.parseInt(from.substring(1, 2));
+        Piece fromP = this.chessBoard[fromR][fromC];
+
+        int toC = this.translate.get(to.substring(0 ,1));
+        int toR = 8 - Integer.parseInt(to.substring(1, 2));
+        Piece toP = this.chessBoard[toR][toC];
+
+        this.chessBoard[fromR][fromC] = null;
+        fromP.setCoord(toR, toC);
+        this.chessBoard[toR][toC] = fromP;
+    }
+
+    public boolean piecePresent(String from){
+        int fromC = this.translate.get(from.substring(0, 1));
+        int fromR = 8 - Integer.parseInt(from.substring(1, 2));
+        Piece fromP = this.chessBoard[fromR][fromC];
+        return (fromP != null);
+    }
+
 //    public void print(){
 //        for (int r = 0; r < 8; r++){
 //            for (int c = 0; c < 8; c++){
@@ -57,7 +90,7 @@ public class Board {
                 String pieceStr = (this.chessBoard[r][c] != null) ? this.chessBoard[r][c].toString() : "   ";
                 if (pieceStr.equals("   ")){
                     String fillerTxtColor = (sqColor.equals(Colors.GREY_BG)) ? Colors.WHITE : Colors.GREEN;
-                    //change the color black to match the green square
+                    //change the color block to match the green square
                     boardToPrint += sqColor + " " + fillerTxtColor + Piece.PAWN + " " + Colors.RESET;
                 } else {
                     boardToPrint += sqColor + pieceStr + sqColor + Colors.RESET;
