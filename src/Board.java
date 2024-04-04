@@ -56,9 +56,9 @@ public class Board {
                 String sqColor = ((r + c) % 2 == 0) ? Colors.GREY_BG : Colors.GREEN_BG;
                 String pieceStr = (this.chessBoard[r][c] != null) ? this.chessBoard[r][c].toString() : "   ";
                 if (pieceStr.equals("   ")){
-                    String txtColor = (sqColor.equals(Colors.GREY_BG)) ? Colors.WHITE : Colors.GREEN;
+                    String fillerTxtColor = (sqColor.equals(Colors.GREY_BG)) ? Colors.WHITE : Colors.GREEN;
                     //change the color black to match the green square
-                    boardToPrint += sqColor + " " + txtColor + Piece.PAWN + " " + Colors.RESET;
+                    boardToPrint += sqColor + " " + fillerTxtColor + Piece.PAWN + " " + Colors.RESET;
                 } else {
                     boardToPrint += sqColor + pieceStr + sqColor + Colors.RESET;
                 }
