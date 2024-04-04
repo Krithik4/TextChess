@@ -47,7 +47,7 @@ public class Board {
 //            System.out.println();
 //        }
 //    }
-
+//hello there how are u
     public String toString() {
         String boardToPrint = "";
         for (int r = 0; r < 8; r++) {
