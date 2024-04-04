@@ -51,7 +51,7 @@ public class Board {
     public String toString() {
         String boardToPrint = "";
         for (int r = 0; r < 8; r++) {
-            boardToPrint += String.valueOf((8 - r)) + " ";
+            boardToPrint += (8 - r) + " ";
             for (int c = 0; c < 8; c++) {
                 String sqColor = ((r + c) % 2 == 0) ? Colors.GREY_BG : Colors.GREEN_BG;
                 String pieceStr = (this.chessBoard[r][c] != null) ? this.chessBoard[r][c].toString() : "   ";
@@ -63,8 +63,8 @@ public class Board {
                     boardToPrint += sqColor + pieceStr + sqColor + Colors.RESET;
                 }
             }
-            boardToPrint += /* col letters*/ "\n";
+            boardToPrint += "\n";
         }
-            return boardToPrint;
+        return boardToPrint + "   a   b   c  d   e  f   g   h"/* col letters*/;
     }
 }
