@@ -1,19 +1,19 @@
 import java.util.HashMap;
 public class Board {
-    private HashMap<String, Integer> translate;
+    public static HashMap<String, Integer> translations;
     private Piece[][] chessBoard;
-    private boolean whiteTurn;
+    private boolean isWhiteTurn;
     public Board(){
-        this.translate = new HashMap<String, Integer>();
-        this.translate.put("a", 0);
-        this.translate.put("b", 1);
-        this.translate.put("c", 2);
-        this.translate.put("d", 3);
-        this.translate.put("e", 4);
-        this.translate.put("f", 5);
-        this.translate.put("g", 6);
-        this.translate.put("h", 7);
-        this.whiteTurn = true;
+        Board.translations = new HashMap<String, Integer>();
+        Board.translations.put("a", 0);
+        Board.translations.put("b", 1);
+        Board.translations.put("c", 2);
+        Board.translations.put("d", 3);
+        Board.translations.put("e", 4);
+        Board.translations.put("f", 5);
+        Board.translations.put("g", 6);
+        Board.translations.put("h", 7);
+        this.isWhiteTurn = true;
         this.chessBoard = new Piece[8][8];
     }
 
@@ -43,44 +43,60 @@ public class Board {
         }
     }
 
+//    public void takeTurn(String from, String to){
+//        int fromC = this.translate.get(from.substring(0, 1));
+//        int fromR = 8 - Integer.parseInt(from.substring(1, 2));
+//        Piece fromP = this.chessBoard[fromR][fromC];
+//
+//        int toC = this.translate.get(to.substring(0 ,1));
+//        int toR = 8 - Integer.parseInt(to.substring(1, 2));
+//        Piece toP = this.chessBoard[toR][toC];
+//
+//        this.chessBoard[fromR][fromC] = null;
+//        fromP.setCoord(toR, toC);
+//        this.chessBoard[toR][toC] = fromP;
+//    }
+
     public void takeTurn(String from, String to){
-        int fromC = this.translate.get(from.substring(0, 1));
+        if (validFromPiece(from)){
+            int fromC = Board.translations.get(from.substring(0, 1));
+            int fromR = 8 - Integer.parseInt(from.substring(1, 2));
+            Piece fromP = this.chessBoard[fromR][fromC];
+
+            if (true){ //fromP.canMoveTo(this.chessBoard, to);
+                int toC = Board.translations.get(to.substring(0 ,1));
+                int toR = 8 - Integer.parseInt(to.substring(1, 2));
+                this.chessBoard[fromR][fromC] = null;
+                fromP.setCoord(toR, toC);
+                this.chessBoard[toR][toC] = fromP;
+            } else {
+                System.out.println("Not a valid move");
+            }
+        } else {
+            System.out.println("Choose a valid piece to move that is your color");
+        }
+    }
+
+    public boolean validFromPiece(String from){
+        int fromC = Board.translations.get(from.substring(0, 1));
         int fromR = 8 - Integer.parseInt(from.substring(1, 2));
         Piece fromP = this.chessBoard[fromR][fromC];
-
-        int toC = this.translate.get(to.substring(0 ,1));
-        int toR = 8 - Integer.parseInt(to.substring(1, 2));
-        Piece toP = this.chessBoard[toR][toC];
-
-        this.chessBoard[fromR][fromC] = null;
-        fromP.setCoord(toR, toC);
-        this.chessBoard[toR][toC] = fromP;
+        if (fromP == null){
+            return false;
+        }
+        if (fromP.getColor() == this.isWhiteTurn){
+            return true;
+        }
+        return false;
     }
 
     public boolean piecePresent(String from){
-        int fromC = this.translate.get(from.substring(0, 1));
+        int fromC = Board.translations.get(from.substring(0, 1));
         int fromR = 8 - Integer.parseInt(from.substring(1, 2));
         Piece fromP = this.chessBoard[fromR][fromC];
         return (fromP != null);
     }
 
-//    public void print(){
-//        for (int r = 0; r < 8; r++){
-//            for (int c = 0; c < 8; c++){
-//                String pChar = (chessBoard[r][c] == null) ? Piece.PAWN : chessBoard[r][c].toString();
-//                if ((r + c) % 2 == 0){
-//                    if (this.chessBoard[r][c] != null){
-//
-//                    }
-//                    System.out.print(Colors.GREY_BG + pChar + Colors.GREY_BG + Colors.RESET);
-//                } else {
-//                    System.out.print(Colors.GREEN_BG + pChar + Colors.GREEN_BG + Colors.RESET);
-//                }
-//            }
-//            System.out.println();
-//        }
-//    }
-//hello there how are u
     public String toString() {
         String boardToPrint = "";
         for (int r = 0; r < 8; r++) {

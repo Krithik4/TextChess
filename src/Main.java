@@ -6,9 +6,8 @@ public class Main
         test.setup();
         System.out.println(test);
         String from = "b1";
-        if (test.piecePresent(from)){
-            test.takeTurn(from, "a3");
-        }
+        String to = "c3";
+        test.takeTurn(from, to);
         System.out.println("\n" + test);
     }
 
