@@ -4,6 +4,8 @@ public class Piece {
     protected int col;
     protected String pieceChar;
 
+    protected int pointValue;
+
     public static final String PAWN = "\u265F";
     public static final String KNIGHT = "\u265E";
     public static final String BISHOP = "\u265D";
@@ -26,6 +28,10 @@ public class Piece {
     public void setCoord(int r, int c){
         this.row = r;
         this.col = c;
+    }
+
+    public boolean canMoveTo(Board gameBoard, String to){
+        return false;
     }
     public String toString(){
         return " " + (this.isWhite ? "" : Colors.BLACK) + this.pieceChar + " " + Colors.RESET;

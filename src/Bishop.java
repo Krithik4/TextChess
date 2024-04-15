@@ -2,6 +2,7 @@ public class Bishop extends Piece {
 
     public Bishop(boolean isW, int r, int c){
         super(isW, r, c, Piece.BISHOP);
+        super.pointValue = 3;
     }
 
     // public String toString(){

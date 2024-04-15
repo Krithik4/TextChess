@@ -5,10 +5,21 @@ public class Main
         Board test = new Board();
         test.setup();
         System.out.println(test);
-        String from = "b1";
-        String to = "c3";
+        String from = "c2";
+        String to = "c4";
         test.takeTurn(from, to);
         System.out.println("\n" + test);
+        test.takeTurn("a7", "a5");
+        System.out.println("\n" + test);
+        test.takeTurn("c4", "c5");
+        System.out.println("\n" + test);
+        test.takeTurn("a5", "a4");
+        System.out.println("\n" + test);
+        test.takeTurn("c5", "c6");
+        System.out.println("\n" + test);
+        test.takeTurn("c7", "c5");
+        System.out.println("\n" + test);
+
     }
 
 

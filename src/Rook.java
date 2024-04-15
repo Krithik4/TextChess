@@ -2,6 +2,7 @@ public class Rook extends Piece {
 
     public Rook(boolean isW, int r, int c){
         super(isW, r, c, Piece.ROOK);
+        super.pointValue = 5;
     }
 
     // public String toString(){

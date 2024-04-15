@@ -2,6 +2,7 @@ public class King extends Piece {
 
     public King(boolean isW, int r, int c){
         super(isW, r, c, Piece.KING);
+        super.pointValue = -1;
     }
 
     // public String toString(){

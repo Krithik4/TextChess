@@ -4,6 +4,7 @@ public class Knight extends Piece {
 
     public Knight(boolean isW, int r, int c){
         super(isW, r, c, Piece.KNIGHT);
+        super.pointValue = 3;
     }
 
     public boolean canMoveTo(Piece[][] board, String to){

@@ -1,6 +1,7 @@
 import java.util.HashMap;
 public class Board {
     public static HashMap<String, Integer> translations;
+    public static HashMap<Integer, String> revTranslations;
     private Piece[][] chessBoard;
     private boolean isWhiteTurn;
     public Board(){
@@ -13,32 +14,42 @@ public class Board {
         Board.translations.put("f", 5);
         Board.translations.put("g", 6);
         Board.translations.put("h", 7);
+
+        Board.revTranslations = new HashMap<Integer, String>();
+        Board.revTranslations.put(0, "a");
+        Board.revTranslations.put(1, "b");
+        Board.revTranslations.put(2, "c");
+        Board.revTranslations.put(3, "d");
+        Board.revTranslations.put(4, "e");
+        Board.revTranslations.put(5, "f");
+        Board.revTranslations.put(6, "g");
+        Board.revTranslations.put(7, "h");
         this.isWhiteTurn = true;
         this.chessBoard = new Piece[8][8];
     }
 
     public void setup(){
         for (int i = 0; i < 8; i++){
-            this.chessBoard[1][i] = new Pawn(false, 0, i);
-            this.chessBoard[6][i] = new Pawn(true, 0, i);
+            this.chessBoard[1][i] = new Pawn(false, 1, i);
+            this.chessBoard[6][i] = new Pawn(true, 6, i);
         }
 
         for (int i = 0; i < 8; i++){
             if (i == 0 || i == 7){
-                this.chessBoard[0][i] = new Rook(false, 1, i);
-                this.chessBoard[7][i] = new Rook(true, 6, i);
+                this.chessBoard[0][i] = new Rook(false, 0, i);
+                this.chessBoard[7][i] = new Rook(true, 7, i);
             } else if (i == 1 || i == 6){
-                this.chessBoard[0][i] = new Knight(false, 1, i);
-                this.chessBoard[7][i] = new Knight(true, 6, i);
+                this.chessBoard[0][i] = new Knight(false, 0, i);
+                this.chessBoard[7][i] = new Knight(true, 7, i);
             } else if (i == 2 || i == 5){
-                this.chessBoard[0][i] = new Bishop(false, 1, i);
-                this.chessBoard[7][i] = new Bishop(true, 6, i);
+                this.chessBoard[0][i] = new Bishop(false, 0, i);
+                this.chessBoard[7][i] = new Bishop(true, 7, i);
             } else if (i == 3){
-                this.chessBoard[0][i] = new Queen(false, 1, i);
-                this.chessBoard[7][i] = new Queen(true, 6, i);
+                this.chessBoard[0][i] = new Queen(false, 0, i);
+                this.chessBoard[7][i] = new Queen(true, 7, i);
             } else {
-                this.chessBoard[0][i] = new King(false, 1, i);
-                this.chessBoard[7][i] = new King(true, 6, i);
+                this.chessBoard[0][i] = new King(false, 0, i);
+                this.chessBoard[7][i] = new King(true, 7, i);
             }
         }
     }
@@ -63,12 +74,13 @@ public class Board {
             int fromR = 8 - Integer.parseInt(from.substring(1, 2));
             Piece fromP = this.chessBoard[fromR][fromC];
 
-            if (true){ //fromP.canMoveTo(this.chessBoard, to);
+            if (fromP.canMoveTo(this, to)){ //fromP.canMoveTo(this.chessBoard, to);
                 int toC = Board.translations.get(to.substring(0 ,1));
                 int toR = 8 - Integer.parseInt(to.substring(1, 2));
                 this.chessBoard[fromR][fromC] = null;
                 fromP.setCoord(toR, toC);
                 this.chessBoard[toR][toC] = fromP;
+                this.isWhiteTurn = !this.isWhiteTurn;
             } else {
                 System.out.println("Not a valid move");
             }
@@ -115,5 +127,9 @@ public class Board {
             boardToPrint += "\n";
         }
         return boardToPrint + "   a   b   c  d   e  f   g   h"/* col letters*/;
+    }
+
+    public Piece[][] getChessBoard() {
+        return this.chessBoard;
     }
 }

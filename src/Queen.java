@@ -2,6 +2,7 @@ public class Queen extends Piece {
 
     public Queen(boolean isW, int r, int c){
         super(isW, r, c, Piece.QUEEN);
+        super.pointValue = 9;
     }
 
     // public String toString(){
