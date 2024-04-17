@@ -9,16 +9,23 @@ public class Main
         String to = "c4";
         test.takeTurn(from, to);
         System.out.println("\n" + test);
-        test.takeTurn("a7", "a5");
+        test.takeTurn("b7", "b5");
         System.out.println("\n" + test);
-        test.takeTurn("c4", "c5");
+        test.takeTurn("c4", "b5");
         System.out.println("\n" + test);
-        test.takeTurn("a5", "a4");
+        test.takeTurn("d7", "d5");
         System.out.println("\n" + test);
-        test.takeTurn("c5", "c6");
+        test.takeTurn("b5", "b6");
         System.out.println("\n" + test);
-        test.takeTurn("c7", "c5");
+        test.takeTurn("d5", "d4");
         System.out.println("\n" + test);
+        test.takeTurn("b6", "a7");
+        System.out.println("\n" + test);
+        test.takeTurn("d4", "d3");
+        System.out.println("\n" + test);
+        test.takeTurn("a7", "b8");
+        System.out.println("\n" + test);
+
 
     }
 

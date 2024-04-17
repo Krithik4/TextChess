@@ -26,50 +26,76 @@ public class Pawn extends Piece {
         int toC = Board.translations.get(to.substring(0 ,1));
         int toR = 8 - Integer.parseInt(to.substring(1, 2));
 
-//        if (onHomeRow){
-//            if (this.isWhite){
-//                if ((toR - this.row == -2 || toR - this.row == -1) && toC == this.col){
-//                    return true;
-//                }
-//            } else {
-//                if ((toR - this.row == 2 || toR - this.row == 1) && toC == this.col){
-//                    return true;
-//                }
-//            }
-//        } else {
-//            if (this.isWhite){
-//                if (toR - this.row == -1 && toC == this.col){
-//                    return true;
-//                }
-//            } else {
-//                if (toR - this.row == 1 && toC == this.col){
-//                    return true;
-//                }
-//            }
-//        }
-
         if (onHomeRow){
             if (this.isWhite){
-                possibleMoves.add(Board.revTranslations.get(toC) + String.valueOf(8 - (this.row - 2)));
-                possibleMoves.add(Board.revTranslations.get(toC) + String.valueOf(8 - (this.row - 1)));
+                if (board[this.row - 1][toC] == null){
+                    possibleMoves.add(Board.revTranslations.get(toC) + String.valueOf(8 - (this.row - 1)));
+                    if (board[this.row - 2][toC] == null){
+                        possibleMoves.add(Board.revTranslations.get(toC) + String.valueOf(8 - (this.row - 2)));
+                    }
+                }
             } else {
-                possibleMoves.add(Board.revTranslations.get(toC) + String.valueOf(8 - (this.row + 2)));
-                possibleMoves.add(Board.revTranslations.get(toC) + String.valueOf(8 - (this.row + 1)));
+                if (board[this.row + 1][toC] == null){
+                    possibleMoves.add(Board.revTranslations.get(toC) + String.valueOf(8 - (this.row + 1)));
+                    if (board[this.row + 2][toC] == null){
+                        possibleMoves.add(Board.revTranslations.get(toC) + String.valueOf(8 - (this.row + 2)));
+                    }
+                }
             }
         } else {
             if (this.isWhite){
-                possibleMoves.add(Board.revTranslations.get(toC) + String.valueOf(8 - (this.row - 1)));
+                if (board[this.row - 1][toC] == null){
+                    possibleMoves.add(Board.revTranslations.get(toC) + String.valueOf(8 - (this.row - 1)));
+                }
             } else {
-                possibleMoves.add(Board.revTranslations.get(toC) + String.valueOf(8 - (this.row + 1)));
+                if (board[this.row + 1][toC] == null) {
+                    possibleMoves.add(Board.revTranslations.get(toC) + String.valueOf(8 - (this.row + 1)));
+                }
             }
         }
-        HashSet<String> revisedSet = new HashSet<String>();
 
-        for (String s : possibleMoves){
-            if (!gameBoard.piecePresent(s)){
-                revisedSet.add(s);
+        if (this.col == 7){
+            if (this.isWhite){
+                if (board[this.row - 1][this.col - 1] != null && board[this.row - 1][this.col - 1].getColor() != this.isWhite){
+                    possibleMoves.add(Board.revTranslations.get(this.col - 1) + String.valueOf(8 - (this.row - 1)));
+                }
+            } else {
+                if (board[this.row + 1][this.col - 1] != null && board[this.row + 1][this.col - 1].getColor() != this.isWhite){
+                    possibleMoves.add(Board.revTranslations.get(this.col - 1) + String.valueOf(8 - (this.row + 1)));
+                }
+            }
+        } else if (this.col == 0){
+            if (this.isWhite){
+                if (board[this.row - 1][this.col + 1] != null && board[this.row - 1][this.col + 1].getColor() != this.isWhite){
+                    possibleMoves.add(Board.revTranslations.get(this.col + 1) + String.valueOf(8 - (this.row - 1)));
+                }
+            } else {
+                if (board[this.row + 1][this.col + 1] != null && board[this.row + 1][this.col + 1].getColor() != this.isWhite){
+                    possibleMoves.add(Board.revTranslations.get(this.col + 1) + String.valueOf(8 - (this.row + 1)));
+                }
+            }
+        } else {
+            if (this.isWhite){
+                if (board[this.row - 1][this.col - 1] != null && board[this.row - 1][this.col - 1].getColor() != this.isWhite){
+                    possibleMoves.add(Board.revTranslations.get(this.col - 1) + String.valueOf(8 - (this.row - 1)));
+                }
+                if (board[this.row - 1][this.col + 1] != null && board[this.row - 1][this.col + 1].getColor() != this.isWhite){
+                    possibleMoves.add(Board.revTranslations.get(this.col + 1) + String.valueOf(8 - (this.row - 1)));
+                }
+            } else {
+                if (board[this.row + 1][this.col - 1] != null && board[this.row + 1][this.col - 1].getColor() != this.isWhite){
+                    possibleMoves.add(Board.revTranslations.get(this.col - 1) + String.valueOf(8 - (this.row + 1)));
+                }
+                if (board[this.row + 1][this.col + 1] != null && board[this.row + 1][this.col + 1].getColor() != this.isWhite){
+                    possibleMoves.add(Board.revTranslations.get(this.col + 1) + String.valueOf(8 - (this.row + 1)));
+                }
             }
         }
-        return revisedSet.contains(to);
+
+        if (possibleMoves.contains(to) && this.onHomeRow){
+            this.onHomeRow = !this.onHomeRow;
+        }
+        //do promotion stuff
+        return possibleMoves.contains(to);
     }
 }

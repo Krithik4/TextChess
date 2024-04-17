@@ -1,4 +1,6 @@
 import java.util.HashMap;
+import java.util.Scanner;
+
 public class Board {
     public static HashMap<String, Integer> translations;
     public static HashMap<Integer, String> revTranslations;
@@ -80,12 +82,46 @@ public class Board {
                 this.chessBoard[fromR][fromC] = null;
                 fromP.setCoord(toR, toC);
                 this.chessBoard[toR][toC] = fromP;
+                if (fromP instanceof Pawn){
+                    if (fromP.getColor()){
+                        if (toR == 0){
+                            System.out.print("Type the first letter of the piece you want (k, b, r, q): ");
+                            Scanner input = new Scanner(System.in);
+                            String piece = input.nextLine();
+                            promotePiece(fromP.getColor(), toR, toC, piece);
+                        }
+                    } else {
+                        if (toR == 7){
+                            System.out.print("Type the first letter of the piece you want (k, b, r, q): ");
+                            Scanner input = new Scanner(System.in);
+                            String piece = input.nextLine();
+                            promotePiece(fromP.getColor(), toR, toC, piece);
+                        }
+                    }
+                }
                 this.isWhiteTurn = !this.isWhiteTurn;
             } else {
                 System.out.println("Not a valid move");
             }
         } else {
             System.out.println("Choose a valid piece to move that is your color");
+        }
+    }
+
+    public void promotePiece(boolean color, int row, int col, String p){
+        switch (p){
+            case "k":
+                this.chessBoard[row][col] = new Knight(color, row, col);
+                break;
+            case "b":
+                this.chessBoard[row][col] = new Bishop(color, row, col);
+                break;
+            case "r":
+                this.chessBoard[row][col] = new Rook(color, row, col);
+                break;
+            case "q":
+                this.chessBoard[row][col] = new Queen(color, row, col);
+                break;
         }
     }
 
