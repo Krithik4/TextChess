@@ -9,8 +9,6 @@ public class Knight extends Piece {
 
     public boolean canMoveTo(Board gameBoard, String to){
         Piece[][] board = gameBoard.getChessBoard();
-        int toC = Board.translations.get(to.substring(0 ,1));
-        int toR = 8 - Integer.parseInt(to.substring(1, 2));
         HashSet<String> possibleLocations = new HashSet<String>();
         if (super.row - 1 >= 0){
             if (super.col - 2 >= 0){
@@ -44,7 +42,6 @@ public class Knight extends Piece {
                 possibleLocations.add(Board.revTranslations.get(super.col + 1) + String.valueOf(8 - (super.row + 2)));
             }
         }
-
 
         HashSet<String> revisedSet = new HashSet<String>();
         for (String s : possibleLocations){
