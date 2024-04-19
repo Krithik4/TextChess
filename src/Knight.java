@@ -7,30 +7,60 @@ public class Knight extends Piece {
         super.pointValue = 3;
     }
 
-    public boolean canMoveTo(Piece[][] board, String to){
+    public boolean canMoveTo(Board gameBoard, String to){
+        Piece[][] board = gameBoard.getChessBoard();
         int toC = Board.translations.get(to.substring(0 ,1));
         int toR = 8 - Integer.parseInt(to.substring(1, 2));
-
-        //possible rows -> r - 1
-            //possible cols -> c - 2 or c + 2
-        //possible rows -> r + 1
-            //possible cols -> c - 2 or c + 2
         HashSet<String> possibleLocations = new HashSet<String>();
         if (super.row - 1 >= 0){
-            //translate coords and add locations to set
-        } else if (super.row + 1 <= 7){
-            //translate coords and add locations to set
-        } else if (super.row - 2 >= 0){
-            //translate coords and add locations to set
-        } else if (super.row + 2 <= 7){
-            //translate coords and add locations to set
+            if (super.col - 2 >= 0){
+                possibleLocations.add(Board.revTranslations.get(super.col - 2) + String.valueOf(8 - (super.row - 1)));
+            }
+            if (super.col + 2 <= 7){
+                possibleLocations.add(Board.revTranslations.get(super.col + 2) + String.valueOf(8 - (super.row - 1)));
+            }
+        }
+        if (super.row + 1 <= 7){
+            if (super.col - 2 >= 0){
+                possibleLocations.add(Board.revTranslations.get(super.col - 2) + String.valueOf(8 - (super.row + 1)));
+            }
+            if (super.col + 2 <= 7){
+                possibleLocations.add(Board.revTranslations.get(super.col + 2) + String.valueOf(8 - (super.row + 1)));
+            }
+        }
+        if (super.row - 2 >= 0){
+            if (super.col - 1 >= 0){
+                possibleLocations.add(Board.revTranslations.get(super.col - 1) + String.valueOf(8 - (super.row - 2)));
+            }
+            if (super.col + 1 <= 7){
+                possibleLocations.add(Board.revTranslations.get(super.col + 1) + String.valueOf(8 - (super.row - 2)));
+            }
+        }
+        if (super.row + 2 <= 7){
+            if (super.col - 1 >= 0){
+                possibleLocations.add(Board.revTranslations.get(super.col - 1) + String.valueOf(8 - (super.row + 2)));
+            }
+            if (super.col + 1 <= 7){
+                possibleLocations.add(Board.revTranslations.get(super.col + 1) + String.valueOf(8 - (super.row + 2)));
+            }
         }
 
-        //then filter to see if those locations have same color piece
 
+        HashSet<String> revisedSet = new HashSet<String>();
+        for (String s : possibleLocations){
+            int col = Board.translations.get(s.substring(0 ,1));
+            int row = 8 - Integer.parseInt(s.substring(1, 2));
+            if (board[row][col] == null){
+                revisedSet.add(s);
+            } else if (board[row][col].getColor() != this.isWhite){
+                revisedSet.add(s);
+            }
+        }
 
-        return false;
+        return revisedSet.contains(to);
     }
+
+
     // public String toString(){
     //     String reset = "\u001B[0m";
     // 	String black = "\u001B[30m";
