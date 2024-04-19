@@ -5,6 +5,13 @@ public class Rook extends Piece {
         super.pointValue = 5;
     }
 
+    public boolean canMoveTo(Board gameBoard, String to){
+        Piece[][] board = gameBoard.getChessBoard();
+
+
+        return false;
+    }
+
     // public String toString(){
     //     String reset = "\u001B[0m";
     // 	String black = "\u001B[30m";
