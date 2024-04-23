@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class Main
 {
@@ -5,16 +6,24 @@ public class Main
         Board test = new Board();
         test.setup();
         System.out.println(test);
-        test.takeTurn("d2", "d4");
-        System.out.println("\n" + test);
-        test.takeTurn("d7", "d5");
-        System.out.println("\n" + test);
-        test.takeTurn("d1", "d2");
-        System.out.println("\n" + test);
-        test.takeTurn("e7", "e6");
-        System.out.println("\n" + test);
-        test.takeTurn("d2", "g5");
-        System.out.println("\n" + test);
+        Scanner input = new Scanner(System.in);
+        while (true){
+            System.out.print("Enter from and to coordinatees separated with space: ");
+            test.takeTurn(input.next(), input.next());
+            System.out.println("\n" + test);
+        }
+//        test.takeTurn("d2", "d4");
+//        System.out.println("\n" + test);
+//        test.takeTurn("d7", "d5");
+//        System.out.println("\n" + test);
+//        test.takeTurn("d1", "d2");
+//        System.out.println("\n" + test);
+//        test.takeTurn("e7", "e6");
+//        System.out.println("\n" + test);
+//        test.takeTurn("d2", "g5");
+//        System.out.print("\033[H\033[2J");
+//        System.out.flush();
+//        System.out.println("\n" + test);
 //        test.takeTurn("g2", "g3");
 //        System.out.println("\n" + test);
 //        test.takeTurn("g7", "g5");
