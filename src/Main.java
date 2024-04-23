@@ -5,20 +5,29 @@ public class Main
         Board test = new Board();
         test.setup();
         System.out.println(test);
-        test.takeTurn("h2", "h4");
-        System.out.println("\n" + test);
-        test.takeTurn("h7", "h5");
-        System.out.println("\n" + test);
-        test.takeTurn("h1", "h3");
-        System.out.println("\n" + test);
-        test.takeTurn("g8", "f6");
-        System.out.println("\n" + test);
-        test.takeTurn("h3", "f3");
-        System.out.println("\n" + test);
-        test.takeTurn("a7", "a5");
-        System.out.println("\n" + test);
-        test.takeTurn("f3", "f6");
-        System.out.println("\n" + test);
+//        test.takeTurn("g2", "g3");
+//        System.out.println("\n" + test);
+//        test.takeTurn("g7", "g5");
+//        System.out.println("\n" + test);
+//        test.takeTurn("f1", "h3");
+//        System.out.println("\n" + test);
+//        test.takeTurn("d7", "d5");
+//        System.out.println("\n" + test);
+//        test.takeTurn("f2", "f4");
+//        System.out.println("\n" + test);
+//        test.takeTurn("c8", "h3");
+//        System.out.println("\n" + test);
+//        test.takeTurn("e2", "e4");
+//        System.out.println("\n" + test);
+//        test.takeTurn("h3", "f1");
+//        System.out.println("\n" + test);
+//        test.takeTurn("c2", "c3");
+//        System.out.println("\n" + test);
+//        test.takeTurn("f1", "a6");
+//        System.out.println("\n" + test);
+//        test.takeTurn("b8", "d7");
+//        clearScreen();
+//        System.out.println("\n" + test);
 //        test.takeTurn("b1", "c3");
 //        System.out.println("\n" + test);
 //        test.takeTurn("b8", "a6");
@@ -54,6 +63,7 @@ public class Main
 
 
     }
+
 
 
 }
