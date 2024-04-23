@@ -5,6 +5,16 @@ public class Main
         Board test = new Board();
         test.setup();
         System.out.println(test);
+        test.takeTurn("d2", "d4");
+        System.out.println("\n" + test);
+        test.takeTurn("d7", "d5");
+        System.out.println("\n" + test);
+        test.takeTurn("d1", "d2");
+        System.out.println("\n" + test);
+        test.takeTurn("e7", "e6");
+        System.out.println("\n" + test);
+        test.takeTurn("d2", "g5");
+        System.out.println("\n" + test);
 //        test.takeTurn("g2", "g3");
 //        System.out.println("\n" + test);
 //        test.takeTurn("g7", "g5");
