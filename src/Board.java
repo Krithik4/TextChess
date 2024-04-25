@@ -108,6 +108,10 @@ public class Board {
         }
     }
 
+    public boolean getTurn(){
+        return this.isWhiteTurn;
+    }
+
     public void promotePiece(boolean color, int row, int col, String p){
         switch (p){
             case "k":

@@ -1,86 +1,36 @@
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class Main
 {
     public static void main(String[] args) {
+        String[] cols = {"a", "b", "c", "d", "e", "f","g", "h"};
+        int[] rows = {8, 7, 6, 5, 4, 3, 2, 1};
+        HashSet<String> possibleSpots = new HashSet<>();
+        for (int i = 0; i < cols.length; i++){
+            for (int j = 0; j < rows.length; j++){
+                possibleSpots.add(cols[i] + rows[j]);
+            }
+        }
         Board test = new Board();
         test.setup();
         System.out.println(test);
         Scanner input = new Scanner(System.in);
-        while (true){
+        int i = 0;
+        while (i < 100){ //testing loop - will change later
+            System.out.println("Turn: " + ((test.getTurn()) ? "White" : "Black"));
             System.out.print("Enter from and to coordinatees separated with space: ");
-            test.takeTurn(input.next(), input.next());
+            String from = input.next();
+            String to = input.next();
+            if (possibleSpots.contains(from) && possibleSpots.contains(to)){
+                test.takeTurn(input.next(), input.next());
+            } else {
+                System.out.println("Invalid coordinates");
+            }
+
             System.out.println("\n" + test);
+            i++;
         }
-//        test.takeTurn("d2", "d4");
-//        System.out.println("\n" + test);
-//        test.takeTurn("d7", "d5");
-//        System.out.println("\n" + test);
-//        test.takeTurn("d1", "d2");
-//        System.out.println("\n" + test);
-//        test.takeTurn("e7", "e6");
-//        System.out.println("\n" + test);
-//        test.takeTurn("d2", "g5");
-//        System.out.print("\033[H\033[2J");
-//        System.out.flush();
-//        System.out.println("\n" + test);
-//        test.takeTurn("g2", "g3");
-//        System.out.println("\n" + test);
-//        test.takeTurn("g7", "g5");
-//        System.out.println("\n" + test);
-//        test.takeTurn("f1", "h3");
-//        System.out.println("\n" + test);
-//        test.takeTurn("d7", "d5");
-//        System.out.println("\n" + test);
-//        test.takeTurn("f2", "f4");
-//        System.out.println("\n" + test);
-//        test.takeTurn("c8", "h3");
-//        System.out.println("\n" + test);
-//        test.takeTurn("e2", "e4");
-//        System.out.println("\n" + test);
-//        test.takeTurn("h3", "f1");
-//        System.out.println("\n" + test);
-//        test.takeTurn("c2", "c3");
-//        System.out.println("\n" + test);
-//        test.takeTurn("f1", "a6");
-//        System.out.println("\n" + test);
-//        test.takeTurn("b8", "d7");
-//        clearScreen();
-//        System.out.println("\n" + test);
-//        test.takeTurn("b1", "c3");
-//        System.out.println("\n" + test);
-//        test.takeTurn("b8", "a6");
-//        System.out.println("\n" + test);
-//        test.takeTurn("c3", "d5");
-//        System.out.println("\n" + test);
-//        test.takeTurn("a6", "c5");
-//        System.out.println("\n" + test);
-//        test.takeTurn("d5", "c7");
-//        System.out.println("\n" + test);
-//        test.takeTurn("b8", "a6");
-//        System.out.println("\n" + test);
-//        test.takeTurn("c3", "d1");
-//        System.out.println("\n" + test);
-//        test.takeTurn(from, to);
-//        System.out.println("\n" + test);
-//        test.takeTurn("b7", "b5");
-//        System.out.println("\n" + test);
-//        test.takeTurn("c4", "b5");
-//        System.out.println("\n" + test);
-//        test.takeTurn("d7", "d5");
-//        System.out.println("\n" + test);
-//        test.takeTurn("b5", "b6");
-//        System.out.println("\n" + test);
-//        test.takeTurn("d5", "d4");
-//        System.out.println("\n" + test);
-//        test.takeTurn("b6", "a7");
-//        System.out.println("\n" + test);
-//        test.takeTurn("d4", "d3");
-//        System.out.println("\n" + test);
-//        test.takeTurn("a7", "b8");
-//        System.out.println("\n" + test);
-
-
     }
 
 
